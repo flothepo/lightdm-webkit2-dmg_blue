@@ -96,8 +96,8 @@ class DmgBlueTheme {
         for (var session of lightdm.sessions) {
             $(`<li id="${session.key}">${session.name}</li>`).appendTo(this.$sessions_list);
         }
-
-        var first = this.$sessions_list.children().first();
+        const defaultSession = lightdm.default_session || lightdm.sessions.first();
+        var first = this.$sessions_list.children().find(e => e.attr('name') === defaultSession);
         first.addClass('selected');
         this.$session.text(first.text());
         this.$session.attr('id', first.attr('id'));
